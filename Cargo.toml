@@ -1,0 +1,6 @@
+[package]
+name = "mmix"
+version = "0.1.0"
+authors = ["Tobias Stolzmann <tobias.stolzmann@gmail.com>"]
+
+[dependencies]
