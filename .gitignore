@@ -1,0 +1,14 @@
+# Ignore temporary Cargo files
+Cargo.lock
+target/
+
+# Ignore Sublime files
+*.sublime-*
+
+# Ignore OS config files
+*.bak
+*.directory
+*Desktop.ini
+*desktop.ini
+*Thumbs.db
+*thumbs.db
