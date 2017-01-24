@@ -1,5 +1,6 @@
 mod cli;
 mod io;
+pub mod machine;
 
 #[cfg(test)]
 mod tests {
