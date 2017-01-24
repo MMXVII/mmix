@@ -1,4 +1,5 @@
 mod cli;
+mod io;
 
 #[cfg(test)]
 mod tests {
