@@ -12,8 +12,9 @@ echo -n ">>> Seaching for lines with trailing whitespaces..."
 # Search for trailing whitespaces
 FOUND=0
 for FILE in $(find $FOLDER -regex $FILES); do
-    if egrep -q " +$" $FILE ; then
-        echo -e "\nFound:\t$FILE"
+    if egrep -q " +$" $FILE; then
+        [ $FOUND == 0 ] && echo -e "\tError."
+        echo -e "Found:\t$FILE"
         FOUND=1
     fi
 done

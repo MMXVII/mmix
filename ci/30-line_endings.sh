@@ -12,8 +12,9 @@ echo -n ">>> Seaching for files with wrong line endings..."
 # Search wrong line endings
 FOUND=0
 for FILE in $(find $FOLDER -regex $FILES); do
-    if grep -q $'\r' $FILE ; then
-        echo -e "\nFound: $FILE"
+    if grep -q $'\r' $FILE; then
+        [ $FOUND == 0 ] && echo -e "\tError."
+        echo -e "Found: $FILE"
         FOUND=1
     fi
 done
