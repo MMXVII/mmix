@@ -27,6 +27,12 @@ impl Into<u8> for R {
 
 pub struct SRegisters(());
 
+impl SRegisters {
+    pub fn new() -> Self {
+        unimplemented!();
+    }
+}
+
 impl Index<R> for SRegisters {
     type Output = Octa;
     fn index(&self, _: R) -> &Self::Output {

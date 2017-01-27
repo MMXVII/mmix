@@ -9,6 +9,12 @@ pub struct OctaAt(u64);
 
 pub struct Memory(());
 
+impl Memory {
+    pub fn new() -> Self {
+        unimplemented!();
+    }
+}
+
 impl Index<ByteAt> for Memory {
     type Output = Byte;
     fn index(&self, _: ByteAt) -> &Self::Output {

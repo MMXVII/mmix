@@ -4,6 +4,12 @@ use std::ops::{Index, IndexMut};
 
 pub struct GPRegisters(());
 
+impl GPRegisters {
+    pub fn new() -> Self {
+        unimplemented!();
+    }
+}
+
 impl Index<u8> for GPRegisters {
     type Output = Octa;
     fn index(&self, _: u8) -> &Self::Output {
