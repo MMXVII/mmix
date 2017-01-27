@@ -1,4 +1,4 @@
-use prelude::*;
+use machine::state::types::*;
 
 use std::ops::{Index, IndexMut};
 

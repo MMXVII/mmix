@@ -1,4 +1,4 @@
-use prelude::*;
+use machine::state::types::Octa;
 
 use std::mem::transmute;
 use std::ops::{Index, IndexMut};
