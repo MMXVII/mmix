@@ -37,3 +37,18 @@ type_impl! {
     (Tetra, u32) => (u32, i32, f32),
     (Octa,  u64) => (u64, i64, f64),
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn f32_tetra_u32() {
+        let x: Tetra = 3.14f32.into();
+        let y: u32 = x.into();
+        assert_eq!(0x4048f5c3, y);
+    }
+
+    // TODO add more tests
+
+}
