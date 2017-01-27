@@ -8,14 +8,14 @@ use self::gpr::GPRegisters;
 use self::mem::Memory;
 
 pub struct State {
-    pc: u64,
-    sr: SRegisters,
-    gpr: GPRegisters,
-    mem: Memory,
+    pub pc: u64,
+    pub sr: SRegisters,
+    pub gpr: GPRegisters,
+    pub mem: Memory,
 }
 
 impl State {
-    fn new() -> Self {
+    pub fn new() -> Self {
         unimplemented!();
     }
 }
