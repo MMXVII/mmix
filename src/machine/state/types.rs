@@ -1,8 +1,15 @@
 use std::mem::transmute;
 
+#[derive(Clone, Copy)]
 pub struct Byte(u8);
+
+#[derive(Clone, Copy)]
 pub struct Wyde(u16);
+
+#[derive(Clone, Copy)]
 pub struct Tetra(u32);
+
+#[derive(Clone, Copy)]
 pub struct Octa(u64);
 
 macro_rules! type_impl {
