@@ -1,1 +1,1 @@
-pub use machine::state::generic::types::*;
+pub use machine::state::types::*;

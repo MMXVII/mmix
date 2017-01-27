@@ -1,7 +1,7 @@
-pub mod generic;
 pub mod gpr;
 pub mod mem;
 pub mod sr;
+pub mod types;
 
 use self::sr::SRegisters;
 use self::gpr::GPRegisters;
