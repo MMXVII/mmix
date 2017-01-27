@@ -1,0 +1,12 @@
+pub mod arithmetic;
+pub mod bitwise;
+pub mod bytewise;
+pub mod conditional;
+pub mod control;
+pub mod float;
+pub mod immediate;
+pub mod interrupt;
+pub mod memory;
+pub mod other;
+pub mod subroutine;
+pub mod system;
