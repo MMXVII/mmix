@@ -12,8 +12,9 @@ echo -n ">>> Seaching for files with tab characters..."
 # Search for files with tab characters
 FOUND=0
 for FILE in $(find $FOLDER -regex $FILES); do
-    if grep -q $'\t' $FILE ; then
-        echo -e "\nFound: $FILE"
+    if grep -q $'\t' $FILE; then
+        [ $FOUND == 0 ] && echo -e "\t\tError."
+        echo -e "Found: $FILE"
         FOUND=1
     fi
 done
