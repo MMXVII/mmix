@@ -55,6 +55,9 @@ pub use self::fune::fune;
 mod fun;
 pub use self::fun::fun;
 
+mod ldsfi;
+pub use self::ldsfi::ldsfi;
+
 mod ldsf;
 pub use self::ldsf::ldsf;
 
@@ -69,6 +72,9 @@ pub use self::sflotui::sflotui;
 
 mod sflotu;
 pub use self::sflotu::sflotu;
+
+mod stsfi;
+pub use self::stsfi::stsfi;
 
 mod stsf;
 pub use self::stsf::stsf;
