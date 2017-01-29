@@ -1,3 +1,13 @@
+macro_rules! mod_def_reexport {
+    ( $( $instr:ident, )* ) => (
+        $(
+            mod $instr;
+            pub use self::$instr::$instr;
+        )*
+    )
+}
+
+
 pub mod arithmetic;
 pub mod bitwise;
 pub mod bytewise;
@@ -278,4 +288,3 @@ pub const SEMANTICS: [Semantic; 256] = [
     other::get,
     interrupt::trip,
 ];
-

@@ -1,10 +1,6 @@
-
-mod resume;
-pub use self::resume::resume;
-
-mod trap;
-pub use self::trap::trap;
-
-mod trip;
-pub use self::trip::trip;
+mod_def_reexport!{
+    resume,
+    trap,
+    trip,
+}
 
