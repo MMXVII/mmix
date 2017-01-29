@@ -21,14 +21,14 @@ pub fn get(_opcode: u8) -> Semantic {
 type Semantic = fn(&mut State, u8, u8, u8);
 
 pub const SEMANTICS: [Semantic; 256] = [
-    interrupt::trap,    
-    float::fcmp,      
-    float::fun,       
-    float::feql,      
-    float::fadd,      
-    float::fix,       
-    float::fsub,      
-    float::fixu,        
+    interrupt::trap,
+    float::fcmp,
+    float::fun,
+    float::feql,
+    float::fadd,
+    float::fix,
+    float::fsub,
+    float::fixu,
     float::flot,
     float::floti,
     float::flotu,
