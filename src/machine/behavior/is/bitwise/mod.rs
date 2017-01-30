@@ -1,0 +1,23 @@
+mod_def_reexport!{
+    andi,
+    andni,
+    andn,
+    and,
+    muxi,
+    mux,
+    nandi,
+    nand,
+    nori,
+    nor,
+    nxori,
+    nxor,
+    ori,
+    orni,
+    orn,
+    or,
+    saddi,
+    sadd,
+    xori,
+    xor,
+}
+
