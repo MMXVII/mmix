@@ -29,7 +29,7 @@ impl IndexMut<ByteAt> for Memory {
 }
 
 impl Index<WydeAt> for Memory {
-    type Output = Byte;
+    type Output = Wyde;
     fn index(&self, _: WydeAt) -> &Self::Output {
         unimplemented!();
     }
@@ -42,7 +42,7 @@ impl IndexMut<WydeAt> for Memory {
 }
 
 impl Index<TetraAt> for Memory {
-    type Output = Byte;
+    type Output = Tetra;
     fn index(&self, _: TetraAt) -> &Self::Output {
         unimplemented!();
     }
@@ -55,7 +55,7 @@ impl IndexMut<TetraAt> for Memory {
 }
 
 impl Index<OctaAt> for Memory {
-    type Output = Byte;
+    type Output = Octa;
     fn index(&self, _: OctaAt) -> &Self::Output {
         unimplemented!();
     }
