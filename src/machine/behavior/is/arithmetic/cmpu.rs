@@ -4,7 +4,7 @@ pub fn cmpu(state: &mut State, x: u8, y: u8, z: u8) {
     // load operands
     let op1: u64 = state.gpr[y].into();
 	let op2: u64 = state.gpr[z].into();
-	// execute 
+	// execute
     let dif = op1.wrapping_sub(op2);
     // store result
     if dif > 0 {
