@@ -2,10 +2,10 @@ use machine::state::types::*;
 
 use std::ops::{Index, IndexMut};
 
-pub struct ByteAt(u64);
-pub struct WydeAt(u64);
-pub struct TetraAt(u64);
-pub struct OctaAt(u64);
+pub struct ByteAt(pub u64);
+pub struct WydeAt(pub u64);
+pub struct TetraAt(pub u64);
+pub struct OctaAt(pub u64);
 
 pub struct Memory(());
 
