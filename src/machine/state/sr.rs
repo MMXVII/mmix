@@ -3,7 +3,7 @@ use machine::state::types::Octa;
 use std::mem::transmute;
 use std::ops::{Index, IndexMut};
 
-enum R {
+pub enum R {
     A = 21,  B =  0,  C =  8,  D =  1,  E =  2,  F = 22,  G = 19,  H =  3,
     I = 12,  J =  4,  K = 15,  L = 20,  M =  5,  N =  9,  O = 10,  P = 23,
     Q = 16,  R =  6,  S = 11,  T = 13,  U = 17,  V = 18,  W = 24,  X = 25,
