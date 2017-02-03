@@ -1,18 +1,21 @@
 use machine::state::State;
-use machine::behavior::is::other::put;
+use machine::state::sr::R;
 
 pub fn mulu(state: &mut State, x: u8, y: u8, z: u8) {
+    // Load operands
     let op1: u64 = state.gpr[y].into();
     let op2: u64 = state.gpr[z].into();
 
-    let res = op1.overflowing_mul(op2);
+    // Execute
+    // lower half
+    let low_res = op1.wrapping_mul(op2);
 
-    if res.1 == false {
-        state.gpr[x] = res.0.into();
-    } else {
-        state.gpr[x] = res.0.into();
-        let rh: u8 = (2 as u8).pow(64).wrapping_sub(op1 as u8);
-        put(state, rh, 3, 0); // himult register
-    }
+    // upper half
+    let upp_op1 = op1.wrapping_shl(32);
+    let upp_op2 = op2.wrapping_shl(32);
+    let upp_res = upp_op1.wrapping_mul(upp_op2);
+
+    // Store results
+    state.gpr[x] = low_res.into();
+    state.sr[R::H] = upp_res.into();
 }
-
