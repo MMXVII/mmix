@@ -1,11 +1,13 @@
 use machine::state::State;
 
 pub fn addu(state: &mut State, x: u8, y: u8, z: u8) {
-    //  load operands
+    // Load operands
     let op1: u64 = state.gpr[y].into();
     let op2: u64 = state.gpr[z].into();
-    // execute
+
+    // Execute
     let res = op1.wrapping_add(op2);
-    // store result
+
+    // Store result
     state.gpr[x] = res.into();
 }
