@@ -6,5 +6,5 @@ pub fn neg(state: &mut State, x: u8, y: u8, z: u8) {
     // execute
     let res = (y as i64) - op2;
     // store result
-    state.gpr[x] = res.into(); 
+    state.gpr[x] = res.into();
 }
