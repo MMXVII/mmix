@@ -21,9 +21,9 @@ pub fn mului(state: &mut State, x: u8, y: u8, z: u8) {
 }
 
 fn hi(x: u64) -> u64 {
-	x >> 32
+    x >> 32
 }
 
 fn lo(x: u64) -> u64 {
-	(x as u32) as u64
+    (x as u32) as u64
 }
