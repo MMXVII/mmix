@@ -6,6 +6,7 @@ pub fn mului(state: &mut State, x: u8, y: u8, z: u8) {
     let op1: u64 = state.gpr[y].into();
 
     // Calculate the single parts
+    // theory can be found in 'mulu'
     let mut h =  hi(op1) * hi(z as u64);
     let     m =  hi(op1) * lo(z as u64)
                + lo(op1) * hi(z as u64);
