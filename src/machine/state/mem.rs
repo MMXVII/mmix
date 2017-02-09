@@ -15,7 +15,7 @@ pub struct TetraAt(pub u64);
 pub struct OctaAt(pub u64);
 
 pub struct Memory {
-    buf: Box<[Octa]>,
+    buf: Vec<Octa>,
 }
 
 impl Memory {
@@ -24,9 +24,20 @@ impl Memory {
     }
 
     pub fn with_capacity(capacity: u64) -> Self {
-        // Create an "array" that represents the memory
-        let len = (capacity / 8) as usize;
-        let buf = Vec::with_capacity(len).into_boxed_slice();
+        // Compute the number of octas needed
+        let len = {
+            let mut len = (capacity / 8) as usize;
+            if capacity % 8 > 0 {
+                len += 1;
+            }
+            len
+        };
+
+        // Create an initialized vector that represents the memory
+        let mut buf = Vec::with_capacity(len);
+        for _ in 0..len {
+            buf.push(0u64.into());
+        }
 
         // Build and return the memory
         Memory {
