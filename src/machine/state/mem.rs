@@ -7,7 +7,9 @@ pub struct WydeAt(pub u64);
 pub struct TetraAt(pub u64);
 pub struct OctaAt(pub u64);
 
-pub struct Memory(());
+pub struct Memory {
+    buf: Box<[Octa]>,
+}
 
 impl Memory {
     pub fn new() -> Self {
