@@ -15,6 +15,17 @@ impl Memory {
     pub fn new() -> Self {
         unimplemented!();
     }
+
+    pub fn with_capacity(capacity: u64) -> Self {
+        // Create an "array" that represents the memory
+        let len = (capacity / 8) as usize;
+        let buf = Vec::with_capacity(len).into_boxed_slice();
+
+        // Build and return the memory
+        Memory {
+            buf: buf,
+        }
+    }
 }
 
 impl Index<ByteAt> for Memory {
