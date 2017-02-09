@@ -61,8 +61,26 @@ impl IndexMut<ByteAt> for Memory {
 
 impl Index<WydeAt> for Memory {
     type Output = Wyde;
-    fn index(&self, _: WydeAt) -> &Self::Output {
-        unimplemented!();
+    fn index(&self, idx: WydeAt) -> &Self::Output {
+        // Find the octa that holds the wyde
+        let octa: *const Octa = self.index(OctaAt(idx.0));
+
+        // Calculate the wyde's position within that octa
+        let mut pos = (idx.0 % 8 / 2) as isize;
+        if cfg!(target_endian = "little") {
+            pos = (4 - 1) - pos;
+        }
+
+        // Calculate a pointer to the wyde
+        let mut wyde = octa as *const Wyde;
+        wyde = unsafe {
+            wyde.offset(pos)
+        };
+
+        // Return the pointer as reference
+        unsafe {
+            wyde.as_ref()
+        }.unwrap()
     }
 }
 
