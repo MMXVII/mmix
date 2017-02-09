@@ -81,7 +81,7 @@ impl Index<TetraAt> for Memory {
         // Calculate the tetra's position within that octa
         let mut pos = (idx.0 % 8 / 4) as isize;
         if cfg!(target_endian = "little") {
-            pos = (4 - 1) - pos;
+            pos = (2 - 1) - pos;
         }
 
         // Calculate a pointer to the tetra
