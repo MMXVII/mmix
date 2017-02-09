@@ -48,8 +48,26 @@ impl Memory {
 
 impl Index<ByteAt> for Memory {
     type Output = Byte;
-    fn index(&self, _: ByteAt) -> &Self::Output {
-        unimplemented!();
+    fn index(&self, idx: ByteAt) -> &Self::Output {
+        // Find the octa that holds the byte
+        let octa: *const Octa = self.index(OctaAt(idx.0));
+
+        // Calculate the byte's position within that octa
+        let mut pos = (idx.0 % 8 / 1) as isize;
+        if cfg!(target_endian = "little") {
+            pos = (8 - 1) - pos;
+        }
+
+        // Calculate a pointer to the byte
+        let mut byte = octa as *const Byte;
+        byte = unsafe {
+            byte.offset(pos)
+        };
+
+        // Return the pointer as reference
+        unsafe {
+            byte.as_ref()
+        }.unwrap()
     }
 }
 
