@@ -2,9 +2,16 @@ use machine::state::types::*;
 
 use std::ops::{Index, IndexMut};
 
+#[derive(Copy, Clone)]
 pub struct ByteAt(pub u64);
+
+#[derive(Copy, Clone)]
 pub struct WydeAt(pub u64);
+
+#[derive(Copy, Clone)]
 pub struct TetraAt(pub u64);
+
+#[derive(Copy, Clone)]
 pub struct OctaAt(pub u64);
 
 pub struct Memory {
