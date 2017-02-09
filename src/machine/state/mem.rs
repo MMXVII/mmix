@@ -72,8 +72,26 @@ impl Index<ByteAt> for Memory {
 }
 
 impl IndexMut<ByteAt> for Memory {
-    fn index_mut(&mut self, _: ByteAt) -> &mut Self::Output {
-        unimplemented!();
+    fn index_mut(&mut self, idx: ByteAt) -> &mut Self::Output {
+        // Find the octa that holds the byte
+        let octa: *const Octa = self.index_mut(OctaAt(idx.0));
+
+        // Calculate the byte's position within that octa
+        let mut pos = (idx.0 % 8 / 1) as isize;
+        if cfg!(target_endian = "little") {
+            pos = (8 - 1) - pos;
+        }
+
+        // Calculate a pointer to the byte
+        let mut byte = octa as *mut Byte;
+        byte = unsafe {
+            byte.offset(pos)
+        };
+
+        // Return the pointer as reference
+        unsafe {
+            byte.as_mut()
+        }.unwrap()
     }
 }
 
