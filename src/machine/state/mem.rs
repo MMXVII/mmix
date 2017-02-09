@@ -23,21 +23,12 @@ impl Memory {
         unimplemented!();
     }
 
-    pub fn with_capacity(capacity: u64) -> Self {
+    pub fn with_capacity(bytes: u64) -> Self {
         // Compute the number of octas needed
-        let len = {
-            let mut len = (capacity / 8) as usize;
-            if capacity % 8 > 0 {
-                len += 1;
-            }
-            len
-        };
+        let octas = ((bytes + 7) / 8) as usize;
 
-        // Create an initialized vector that represents the memory
-        let mut buf = Vec::with_capacity(len);
-        for _ in 0..len {
-            buf.push(0u64.into());
-        }
+        // Create a zero initialized vector that represents the memory
+        let buf = vec![0u64.into(); octas];
 
         // Build and return the memory
         Memory {
