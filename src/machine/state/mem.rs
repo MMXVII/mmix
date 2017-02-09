@@ -85,8 +85,26 @@ impl Index<WydeAt> for Memory {
 }
 
 impl IndexMut<WydeAt> for Memory {
-    fn index_mut(&mut self, _: WydeAt) -> &mut Self::Output {
-        unimplemented!();
+    fn index_mut(&mut self, idx: WydeAt) -> &mut Self::Output {
+        // Find the octa that holds the wyde
+        let octa: *const Octa = self.index_mut(OctaAt(idx.0));
+
+        // Calculate the wyde's position within that octa
+        let mut pos = (idx.0 % 8 / 2) as isize;
+        if cfg!(target_endian = "little") {
+            pos = (4 - 1) - pos;
+        }
+
+        // Calculate a pointer to the wyde
+        let mut wyde = octa as *mut Wyde;
+        wyde = unsafe {
+            wyde.offset(pos)
+        };
+
+        // Return the pointer as reference
+        unsafe {
+            wyde.as_mut()
+        }.unwrap()
     }
 }
 
