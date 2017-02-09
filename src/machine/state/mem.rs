@@ -63,8 +63,26 @@ impl IndexMut<WydeAt> for Memory {
 
 impl Index<TetraAt> for Memory {
     type Output = Tetra;
-    fn index(&self, _: TetraAt) -> &Self::Output {
-        unimplemented!();
+    fn index(&self, idx: TetraAt) -> &Self::Output {
+        // Find the octa that holds the tetra
+        let octa: *const Octa = self.index(OctaAt(idx.0));
+
+        // Calculate the tetra's position within that octa
+        let mut pos = (idx.0 % 8 / 4) as isize;
+        if cfg!(target_endian = "little") {
+            pos = (4 - 1) - pos;
+        }
+
+        // Calculate a pointer to the tetra
+        let mut tetra = octa as *const Tetra;
+        tetra = unsafe {
+            tetra.offset(pos)
+        };
+
+        // Return the pointer as reference
+        unsafe {
+            tetra.as_ref()
+        }.unwrap()
     }
 }
 
