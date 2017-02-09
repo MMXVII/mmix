@@ -69,13 +69,15 @@ impl IndexMut<TetraAt> for Memory {
 
 impl Index<OctaAt> for Memory {
     type Output = Octa;
-    fn index(&self, _: OctaAt) -> &Self::Output {
-        unimplemented!();
+    fn index(&self, idx: OctaAt) -> &Self::Output {
+        let pos = (idx.0 / 8) as usize;
+        self.buf.index(pos)
     }
 }
 
 impl IndexMut<OctaAt> for Memory {
-    fn index_mut(&mut self, _: OctaAt) -> &mut Self::Output {
-        unimplemented!();
+    fn index_mut(&mut self, idx: OctaAt) -> &mut Self::Output {
+        let pos = (idx.0 / 8) as usize;
+        self.buf.index_mut(pos)
     }
 }
