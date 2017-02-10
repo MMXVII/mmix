@@ -3,6 +3,8 @@ use machine::state::types::Octa;
 use std::mem::transmute;
 use std::ops::{Index, IndexMut};
 
+
+#[derive(Debug, PartialEq, Copy, Clone)]
 pub enum R {
     A = 21,  B =  0,  C =  8,  D =  1,  E =  2,  F = 22,  G = 19,  H =  3,
     I = 12,  J =  4,  K = 15,  L = 20,  M =  5,  N =  9,  O = 10,  P = 23,
@@ -25,23 +27,26 @@ impl Into<u8> for R {
     }
 }
 
-pub struct SRegisters(());
+
+pub struct SRegisters(Vec<Octa>);
 
 impl SRegisters {
     pub fn new() -> Self {
-        unimplemented!();
+        SRegisters(vec![0u64.into(); 32])
     }
 }
 
 impl Index<R> for SRegisters {
     type Output = Octa;
-    fn index(&self, _: R) -> &Self::Output {
-        unimplemented!();
+    fn index(&self, index: R) -> &Self::Output {
+        let i: u8 = index.into();
+        self.0.index(i as usize)
     }
 }
 
 impl IndexMut<R> for SRegisters {
-    fn index_mut(&mut self, _: R) -> &mut Self::Output {
-        unimplemented!();
+    fn index_mut(&mut self, index: R) -> &mut Self::Output {
+        let i: u8 = index.into();
+        self.0.index_mut(i as usize)
     }
 }
