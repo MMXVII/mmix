@@ -16,6 +16,15 @@ pub struct State {
 
 impl State {
     pub fn new() -> Self {
-        unimplemented!();
+        State {
+            // for the moment start execution at address 0
+            pc: 0,
+
+            sr: SRegisters::new(),
+            gpr: GPRegisters::new(),
+
+            // for the moment create 1MB of memory
+            mem: Memory::with_capacity(0x100000)
+        }
     }
 }
