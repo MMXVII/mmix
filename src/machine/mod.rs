@@ -24,12 +24,12 @@ impl Machine {
         unimplemented!();
     }
 
-    pub fn start(&self) {
+    pub fn start(&mut self) {
         unimplemented!();
     }
 
-    pub fn step(&self) {
+    pub fn step(&mut self) {
         self.state.debug_output();
-        behavior::cu::cycle(&mut self.state());
+        behavior::cu::cycle(&mut self.state);
     }
 }
