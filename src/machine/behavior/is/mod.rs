@@ -23,9 +23,8 @@ pub mod system;
 
 use machine::state::State;
 
-pub fn get(_opcode: u8) -> Semantic {
-    unimplemented!();
-    // SEMANTICS[opcode]
+pub fn get(opcode: u8) -> Semantic {
+    SEMANTICS[opcode as usize]
 }
 
 type Semantic = fn(&mut State, u8, u8, u8);
