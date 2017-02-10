@@ -1,6 +1,7 @@
 use machine::state::State;
+use machine::behavior::is::memory::sto;
 
-pub fn stou(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
+/// store octa unsigned
+pub fn stou(state: &mut State, x: u8, y: u8, z: u8) {
+    sto(state, x, y, z);
 }
-

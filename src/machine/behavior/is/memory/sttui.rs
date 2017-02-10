@@ -1,6 +1,7 @@
 use machine::state::State;
+use machine::behavior::is::memory::stti;
 
-pub fn sttui(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
+/// store tetra unsigned immediate
+pub fn sttui(state: &mut State, x: u8, y: u8, z: u8) {
+    stti(state, x, y, z);
 }
-

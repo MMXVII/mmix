@@ -1,6 +1,7 @@
 use machine::state::State;
+use machine::behavior::is::memory::stb;
 
-pub fn stbu(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
+/// store byte unsigned
+pub fn stbu(state: &mut State, x: u8, y: u8, z: u8) {
+    stb(state, x, y, z);
 }
-

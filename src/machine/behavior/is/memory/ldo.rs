@@ -11,8 +11,5 @@ pub fn ldo(state: &mut State, x: u8, y: u8, z: u8) {
     let a = op1.wrapping_add(op2);
 
     // Load from memory
-    let res = state.mem[OctaAt(a)];
-
-    // Store result
-    state.gpr[x] = res;
+    state.gpr[x] = state.mem[OctaAt(a)];
 }
