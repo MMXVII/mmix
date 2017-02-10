@@ -204,7 +204,7 @@ mod tests {
     use super::*;
 
     #[test]
-    fn it_works() {
+    fn mem_test() {
         // Round the number of bytes up to next full Octa
         let mut mem = Memory::with_capacity(4); // 1 Octa of memory
 
@@ -267,9 +267,26 @@ mod tests {
         for i in 0 .. 8 {
             assert_eq!(mem[WydeAt(2 * i)], mem[WydeAt(2 * i + 1)]);
         }
+    }
 
+    #[test]
+    fn compare_addresses() {
+        let mem = Memory::with_capacity(8);
 
+        let octa_ptr: i64 = mem.index(OctaAt(0)) as *const Octa as i64;
 
+        if cfg!(target_endian = "little") {
+            // test that the memory layout on little endian machines confirms with our concept
+
+            let tetra_ptr: i64 = mem.index(TetraAt(4)) as *const Tetra as i64;
+            assert_eq!(tetra_ptr, octa_ptr);
+
+        } else if cfg!(target_endian = "big") {
+            // test data layout on big endian machines
+
+            let tetra_ptr: i64 = mem.index(TetraAt(0)) as *const Tetra as i64;
+            assert_eq!(tetra_ptr, octa_ptr);
+        }
     }
 
 }
