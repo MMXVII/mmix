@@ -4,7 +4,7 @@ pub mod state;
 use self::state::State;
 
 pub struct Machine {
-    _state: State,
+    state: State,
     /* TODO add more fields... */
 }
 
@@ -29,6 +29,7 @@ impl Machine {
     }
 
     pub fn step(&self) {
-        unimplemented!();
+        self.state.debug_output();
+        behavior::cu::cycle(&mut self.state());
     }
 }
