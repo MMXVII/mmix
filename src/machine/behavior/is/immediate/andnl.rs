@@ -1,6 +1,16 @@
 use machine::state::State;
 
-pub fn andnl(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
-}
+/// bitwise and-not low wyde
+pub fn andnl(state: &mut State, x: u8, y: u8, z: u8) {
+    // Load first operand
+    let op1: u64 = state.gpr[x].into();
 
+    // Shift y
+    let y = (y as u64) << 8;
+
+    // Execute
+    let result = op1 & !(y + (z as u64));
+
+    // Store result
+    state.gpr[x] = result.into();
+}

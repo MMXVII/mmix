@@ -1,6 +1,17 @@
 use machine::state::State;
 
-pub fn inch(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
-}
+/// increase by high wyde
+pub fn inch(state: &mut State, x: u8, y: u8, z: u8) {
+    // Load first operand
+    let op1: u64 = state.gpr[x].into();
 
+    // Shift y and z
+    let y = (y as u64) << 56;
+    let z = (z as u64) << 48;
+
+    // Execute
+    let result = op1.wrapping_add(y + z);
+
+    // Store result
+    state.gpr[x] = result.into();
+}

@@ -1,6 +1,13 @@
 use machine::state::State;
 
-pub fn setl(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
-}
+/// set low wyde
+pub fn setl(state: &mut State, x: u8, y: u8, z: u8) {
+    // Shift y
+    let y = (y as u64) << 8;
 
+    // Execute
+    let result = y + (z as u64);
+
+    // Store result
+    state.gpr[x] = result.into();
+}
