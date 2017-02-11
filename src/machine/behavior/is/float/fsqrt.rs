@@ -9,11 +9,11 @@ pub fn fsqrt(state: &mut State, x: u8, y: u8, z: u8) {
 
     // Rounding
     match y {
-    	1 => unimplemented!(),
-    	2 => unimplemented!(),
-    	3 => unimplemented!(),
-    	4 => unimplemented!(),
-    	_ => res = res,
+        1 => unimplemented!(),
+        2 => unimplemented!(),
+        3 => unimplemented!(),
+        4 => unimplemented!(),
+        _ => res = res,
     };
 
     // Store result

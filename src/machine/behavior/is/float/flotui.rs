@@ -7,11 +7,11 @@ pub fn flotui(state: &mut State, x: u8, y: u8, z: u8) {
     // Execute
     let mut res = op1 as f64;
     match y {
-    	1 => unimplemented!(),
-    	2 => unimplemented!(),
-    	3 => unimplemented!(),
-    	4 => unimplemented!(),
-    	_ => res = res,
+        1 => unimplemented!(),
+        2 => unimplemented!(),
+        3 => unimplemented!(),
+        4 => unimplemented!(),
+        _ => res = res,
     }
 
     // Store result

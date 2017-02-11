@@ -12,8 +12,8 @@ pub fn feqle(state: &mut State, x: u8, y: u8, z: u8) {
 
     // Store result
     if res <= eps as i64 {
-    	state.gpr[x] = 1u64.into();
+        state.gpr[x] = 1u64.into();
     } else {
-    	state.gpr[x] = 0u64.into();
+        state.gpr[x] = 0u64.into();
     }
 }
