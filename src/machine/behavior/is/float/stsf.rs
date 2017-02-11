@@ -3,8 +3,8 @@ use machine::state::mem::TetraAt;
 
 pub fn stsf(state: &mut State, x: u8, y: u8, z: u8) {
     // Load operands
-    let op1: u64 = state.gpr[y].into();
-    let op2: u64 = state.gpr[z].into();
+    let op1: f64 = state.gpr[y].into();
+    let op2: f64 = state.gpr[z].into();
 
     // Execute
     let a = op1.wrapping_add(op2);

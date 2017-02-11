@@ -3,7 +3,7 @@ use machine::state::mem::TetraAt;
 
 pub fn stsfi(state: &mut State, x: u8, y: u8, z: u8) {
     // Load operand
-    let op1: u64 = state.gpr[y].into();
+    let op1: f64 = state.gpr[y].into();
 
     // Execute
     let a = op1.wrapping_add(z as u64);
