@@ -2,7 +2,7 @@ use machine::state::State;
 
 /// sideways add
 pub fn sadd(state: &mut State, x: u8, y: u8, z: u8) {
-    // calculate andn and load result
+    // Calculate andn and load result
     super::andn(state, x, y, z);
     let mut bits: u64 = state.gpr[x].into();
 
