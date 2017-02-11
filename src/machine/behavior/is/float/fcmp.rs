@@ -5,13 +5,13 @@ pub fn fcmp(state: &mut State, x: u8, y: u8, z: u8) {
     let op1: f64 = state.gpr[y].into();
     let op2: f64 = state.gpr[z].into();
 
-    // Execute and store result
-    if op1 - op2 > 0.0 {
-        state.gpr[x] = 1i64.into();
-    } else if op1 - op2 < 0.0 {
-        state.gpr[x] = (-1 as i64).into();
-    } else {
-        state.gpr[x] = 0i64.into();
-    }
+    // Execute
+    let res: i64 = match op1 - op2 {
+        d if d > 0.0 =>  1,
+        d if d < 0.0 => -1,
+        _            =>  0,
+    };
 
+    // Store result
+    state.gpr[x] = res.into();
 }

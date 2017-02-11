@@ -8,14 +8,12 @@ pub fn fcmpe(state: &mut State, x: u8, y: u8, z: u8) {
     let eps: f64 = state.sr[R::E].into();
 
     // Execute
-    let res = ((op1 as i64).wrapping_sub(op2 as i64)).abs();
+    let res: i64 = match op1 - op2 {
+        d if d.abs() <= eps =>  0,
+        d if d > 0.0        =>  1,
+        _                   => -1, 
+    };
 
     // Store result
-    if res <= eps as i64 {
-        state.gpr[x] = 0i64.into();
-    } else if op1 > op2 {
-        state.gpr[x] = 1i64.into();
-    } else {
-        state.gpr[x] = (-1 as i64).into();
-    }
+    state.gpr[x] = res.into();
 }

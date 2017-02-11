@@ -8,12 +8,14 @@ pub fn fune(state: &mut State, x: u8, y: u8, z: u8) {
     let eps: f64 = state.sr[R::E].into();
 
     // Execute
-    let res = ((op1 as i64).wrapping_sub(op2 as i64)).abs();
+    let res: i64 = if op1.is_nan() || op1 - op2 > eps {
+        1
+    } else if op2.is_nan() || op1 - op2 < eps {
+        -1
+    } else {
+        0
+    };
 
     // Store result
-    if res >= eps as i64 {
-        state.gpr[x] = 1u64.into();
-    } else {
-        state.gpr[x] = 0u64.into();
-    }
+    state.gpr[x] = res.into();
 }
