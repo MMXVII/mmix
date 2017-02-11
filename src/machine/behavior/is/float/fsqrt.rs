@@ -5,15 +5,12 @@ pub fn fsqrt(state: &mut State, x: u8, y: u8, z: u8) {
     let op1: f64 = state.gpr[z].into();
 
     // Execute
-    let mut res: f64 = op1.sqrt();
-
-    // Rounding
-    match y {
+    let res: f64 = match y {
         1 => unimplemented!(),
         2 => unimplemented!(),
         3 => unimplemented!(),
         4 => unimplemented!(),
-        _ => res = res,
+        _ => op1.sqrt(),
     };
 
     // Store result
