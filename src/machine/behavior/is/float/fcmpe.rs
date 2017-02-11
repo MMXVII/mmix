@@ -11,7 +11,7 @@ pub fn fcmpe(state: &mut State, x: u8, y: u8, z: u8) {
     let res: i64 = match op1 - op2 {
         d if d.abs() <= eps =>  0,
         d if d > 0.0        =>  1,
-        _                   => -1, 
+        _                   => -1,
     };
 
     // Store result
