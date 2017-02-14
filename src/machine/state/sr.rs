@@ -28,25 +28,27 @@ impl Into<u8> for R {
 }
 
 
-pub struct SRegisters(Vec<Octa>);
+pub struct SRegisters {
+    buf: Vec<Octa>
+}
 
 impl SRegisters {
     pub fn new() -> Self {
-        SRegisters(vec![0u64.into(); 32])
+        SRegisters {
+            buf: vec![0u64.into(); 32]
+        }
     }
 }
 
 impl Index<R> for SRegisters {
     type Output = Octa;
     fn index(&self, index: R) -> &Self::Output {
-        let i: u8 = index.into();
-        self.0.index(i as usize)
+        self.buf.index(index as usize)
     }
 }
 
 impl IndexMut<R> for SRegisters {
     fn index_mut(&mut self, index: R) -> &mut Self::Output {
-        let i: u8 = index.into();
-        self.0.index_mut(i as usize)
+        self.buf.index_mut(index as usize)
     }
 }
