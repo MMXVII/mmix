@@ -3,13 +3,13 @@ use machine::state::types::Octa;
 use std::ops::{Index, IndexMut};
 
 pub struct GPRegisters {
-    buf: Vec<Octa>
+    buf: Vec<Octa>,
 }
 
 impl GPRegisters {
     pub fn new() -> Self {
         GPRegisters {
-            buf: vec![0u64.into(); 256]
+            buf: vec![0u64.into(); 256],
         }
     }
 }

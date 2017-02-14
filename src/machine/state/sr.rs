@@ -4,7 +4,7 @@ use std::mem::transmute;
 use std::ops::{Index, IndexMut};
 
 
-#[derive(Debug, PartialEq, Copy, Clone)]
+#[derive(Debug, PartialEq, Eq, Copy, Clone)]
 pub enum R {
     A = 21,  B =  0,  C =  8,  D =  1,  E =  2,  F = 22,  G = 19,  H =  3,
     I = 12,  J =  4,  K = 15,  L = 20,  M =  5,  N =  9,  O = 10,  P = 23,
@@ -29,13 +29,13 @@ impl Into<u8> for R {
 
 
 pub struct SRegisters {
-    buf: Vec<Octa>
+    buf: Vec<Octa>,
 }
 
 impl SRegisters {
     pub fn new() -> Self {
         SRegisters {
-            buf: vec![0u64.into(); 32]
+            buf: vec![0u64.into(); 32],
         }
     }
 }
