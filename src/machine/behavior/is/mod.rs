@@ -23,12 +23,12 @@ pub mod system;
 
 use machine::state::State;
 
-pub fn get_instruction(opcode: u8) -> Semantic {
+pub fn get_semantics(opcode: u8) -> Semantic {
     SEMANTICS[opcode as usize]
 }
 
-pub fn get_instruction_name(opcode: u8) -> &'static str {
-    INSTR_NAMES[opcode as usize]
+pub fn get_symbolics(opcode: u8) -> &'static str {
+    SYMBOLICS[opcode as usize]
 }
 
 type Semantic = fn(&mut State, u8, u8, u8);
@@ -292,7 +292,7 @@ const SEMANTICS: [Semantic; 256] = [
     interrupt::trip,
 ];
 
-const INSTR_NAMES: [&'static str; 256] = [
+const SYMBOLICS: [&'static str; 256] = [
     "interrupt::trap",
     "float::fcmp",
     "float::fun",
