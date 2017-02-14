@@ -35,8 +35,11 @@ impl State {
         // Display content of first 5 GPRegs
         for i in 0 .. 5 {
             let val: u64 = self.gpr[i as u8].into();
-            println!("GP[{}]: {:x}", i, val);
+
+            println!("GP[{}]: {:016x}", i, val);
         }
+
+        println!("");
 
         // Display memory cells 100 - 139 -> 5 Octas
         for i in 0 .. 5 {
@@ -48,7 +51,7 @@ impl State {
             let med_hi: u16 = self.mem[WydeAt(idx + 2)].into();
             let med_lo: u16 = self.mem[WydeAt(idx + 4)].into();
             let lo: u16 = self.mem[WydeAt(idx + 6)].into();
-            println!("M[OctaAt({})]: # {:x} {:x} {:x} {:x}", idx, hi, med_hi, med_lo, lo);
+            println!("M[OctaAt({})]: # {:04x} {:04x} {:04x} {:04x}", idx, hi, med_hi, med_lo, lo);
         }
 
 
@@ -61,6 +64,6 @@ impl State {
 
         println!("");
         println!("PC: {}", self.pc);
-        println!("Next instruction: {} x: #{:x}, #y: {:x}, z: #{:x}", name, x, y, z);
+        println!("Next instruction: {} x: #{:02x}, #y: {:02x}, z: #{:02x}", name, x, y, z);
     }
 }
