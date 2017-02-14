@@ -8,7 +8,7 @@ pub fn put(state: &mut State, x: u8, y: u8, z: u8) {
 
     // Execute
     if x > 31 {
-    	panic!("no register");
+        panic!("no register");
     }
     let res = op1.wrapping_add(op2);
     let sr: R = x.into();

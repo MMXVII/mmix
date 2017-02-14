@@ -7,7 +7,7 @@ pub fn get(state: &mut State, x: u8, y: u8, z: u8) {
 
     // Execute
     if r > 32 {
-    	panic!("no register");
+        panic!("no register");
     }
     let sr: R = (z as u8).into();
     let res: u64 = state.sr[sr].into();
