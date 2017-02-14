@@ -12,7 +12,9 @@ impl Machine {
     // TODO FYI: Machine uses the builder pattern.
 
     pub fn new() -> Self {
-        unimplemented!();
+        Machine {
+            state: State::new()
+        }
     }
 
     pub fn load(self, _pos: u64, _data: &[u8]) -> Self {
