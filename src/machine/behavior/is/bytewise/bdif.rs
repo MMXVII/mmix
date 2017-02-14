@@ -9,8 +9,8 @@ pub fn bdif(state: &mut State, x: u8, y: u8, z: u8) {
     // Execute
     let mut result: u64 = 0;
     for i in 0..8 {
-        let y_byte = get_byte(op1);
-        let z_byte = get_byte(op2);
+        let y_byte = super::get_byte(op1);
+        let z_byte = super::get_byte(op2);
         let interim = (y_byte.saturating_sub(z_byte) as u64) << (8 * i);
         result += interim;
         op1 >>= 8;
@@ -19,8 +19,4 @@ pub fn bdif(state: &mut State, x: u8, y: u8, z: u8) {
 
     // Store result
     state.gpr[x] = result.into();
-}
-
-fn get_byte(bits: u64) -> u8 {
-    bits as u8
 }

@@ -1,7 +1,16 @@
 use machine::state::State;
-use machine::behavior::is::bytewise::odifi;
 
 /// byte difference immediate
 pub fn bdifi(state: &mut State, x: u8, y: u8, z: u8) {
-    odifi(state, x, y, z);
+    // Load first operand
+    let op1: u64 = state.gpr[y].into();
+
+    // Execute
+    let mut result = (op1 >> 8) << 8;
+    let y_byte = super::get_byte(op1);
+    let interim = y_byte.saturating_sub(z) as u64;
+    result += interim;
+
+    // Store result
+    state.gpr[x] = result.into();
 }

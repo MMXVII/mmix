@@ -9,8 +9,8 @@ pub fn tdif(state: &mut State, x: u8, y: u8, z: u8) {
     // Execute
     let mut result: u64 = 0;
     for i in 0..2 {
-        let y_tetra = get_tetra(op1);
-        let z_tetra = get_tetra(op2);
+        let y_tetra = super::get_tetra(op1);
+        let z_tetra = super::get_tetra(op2);
         let interim = (y_tetra.saturating_sub(z_tetra) as u64) << (32 * i);
         result += interim;
         op1 >>= 32;
@@ -19,8 +19,4 @@ pub fn tdif(state: &mut State, x: u8, y: u8, z: u8) {
 
     // Store result
     state.gpr[x] = result.into();
-}
-
-fn get_tetra(bits: u64) -> u32 {
-    bits as u32
 }
