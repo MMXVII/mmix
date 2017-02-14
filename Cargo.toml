@@ -7,3 +7,5 @@ authors = ["Janina Born <jaborn@uni-osnabrueck.de>",
            "Tobias Stolzmann <tobias.stolzmann@gmail.com>"]
 
 [dependencies]
+[[bin]]
+name = "mmix"
