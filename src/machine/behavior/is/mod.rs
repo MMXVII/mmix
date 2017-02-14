@@ -23,11 +23,11 @@ pub mod system;
 
 use machine::state::State;
 
-pub fn get(opcode: u8) -> Semantic {
+pub fn get_instruction(opcode: u8) -> Semantic {
     SEMANTICS[opcode as usize]
 }
 
-pub fn instruction_name(opcode: u8) -> &'static str {
+pub fn get_instruction_name(opcode: u8) -> &'static str {
     INSTR_NAMES[opcode as usize]
 }
 
