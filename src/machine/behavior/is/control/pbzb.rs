@@ -1,6 +1,6 @@
 use machine::state::State;
+use machine::behavior::is::control::bzb;
 
-pub fn pbzb(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
+pub fn pbzb(state: &mut State, x: u8, y: u8, z: u8) {
+    bzb(state, x, y, z);
 }
-

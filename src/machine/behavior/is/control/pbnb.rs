@@ -1,6 +1,6 @@
 use machine::state::State;
+use machine::behavior::is::control::bnb;
 
-pub fn pbnb(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
+pub fn pbnb(state: &mut State, x: u8, y: u8, z: u8) {
+    bnb(state, x, y, z);
 }
-
