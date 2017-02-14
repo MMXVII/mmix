@@ -2,16 +2,16 @@ use machine::state::types::*;
 
 use std::ops::{Index, IndexMut};
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub struct ByteAt(pub u64);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub struct WydeAt(pub u64);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub struct TetraAt(pub u64);
 
-#[derive(Copy, Clone)]
+#[derive(Copy, Clone, Debug, PartialEq)]
 pub struct OctaAt(pub u64);
 
 pub struct Memory {
@@ -197,4 +197,96 @@ impl IndexMut<OctaAt> for Memory {
         let pos = (idx.0 / 8) as usize;
         self.buf.index_mut(pos)
     }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn mem_test() {
+        // Round the number of bytes up to next full Octa
+        let mut mem = Memory::with_capacity(4); // 1 Octa of memory
+
+        mem[OctaAt(0)] = 1u64.into();
+
+        let fu: u64 = mem[OctaAt(0)].into();
+
+        assert_eq!(fu, 1u64);
+
+        let lo: u32 = mem[TetraAt(0)].into();
+        let hi: u32 = mem[TetraAt(4)].into();
+
+        assert_eq!(lo, 0);
+        assert_eq!(hi, 1);
+
+        for i in 0 .. 8 {
+            mem[ByteAt(i)] = ((i + 1) as u8).into();
+        }
+
+        assert_eq!(mem[OctaAt(7)], 0x0102030405060708u64.into());
+
+        assert_eq!(mem[TetraAt(3)], 0x01020304u32.into());
+        assert_eq!(mem[TetraAt(4)], 0x05060708u32.into());
+
+        assert_eq!(mem[WydeAt(0)], 0x0102u16.into());
+        assert_eq!(mem[WydeAt(2)], 0x0304u16.into());
+        assert_eq!(mem[WydeAt(4)], 0x0506u16.into());
+        assert_eq!(mem[WydeAt(6)], 0x0708u16.into());
+
+        // Test that bytes are not changed by changing bytes near them
+        mem[TetraAt(0)] = 0u32.into();
+        mem[WydeAt(7)] = 0u16.into();
+        mem[ByteAt(4)] = 0u8.into();
+
+        assert_eq!(mem[OctaAt(0)], 0x60000u64.into());
+
+    }
+
+    #[test]
+    fn equivalent_indices() {
+
+        let mut mem = Memory::with_capacity(15);
+
+        for i in 0 .. 16 {
+            mem[ByteAt(i)] = (i as u8).into();
+        }
+
+        for i in 1 .. 8 {
+            assert_eq!(mem[OctaAt(0)], mem[OctaAt(i)]);
+            assert_eq!(mem[OctaAt(8)], mem[OctaAt(8 + i)]);
+        }
+
+        for i in 1 .. 4 {
+            assert_eq!(mem[TetraAt(0)], mem[TetraAt(i)]);
+            assert_eq!(mem[TetraAt(4)], mem[TetraAt(4 + i)]);
+            assert_eq!(mem[TetraAt(8)], mem[TetraAt(8 + i)]);
+            assert_eq!(mem[TetraAt(12)], mem[TetraAt(12 + i)]);
+        }
+
+        for i in 0 .. 8 {
+            assert_eq!(mem[WydeAt(2 * i)], mem[WydeAt(2 * i + 1)]);
+        }
+    }
+
+    #[test]
+    fn compare_addresses() {
+        let mem = Memory::with_capacity(8);
+
+        let octa_ptr: i64 = mem.index(OctaAt(0)) as *const Octa as i64;
+
+        if cfg!(target_endian = "little") {
+            // test that the memory layout on little endian machines confirms with our concept
+
+            let tetra_ptr: i64 = mem.index(TetraAt(4)) as *const Tetra as i64;
+            assert_eq!(tetra_ptr, octa_ptr);
+
+        } else if cfg!(target_endian = "big") {
+            // test data layout on big endian machines
+
+            let tetra_ptr: i64 = mem.index(TetraAt(0)) as *const Tetra as i64;
+            assert_eq!(tetra_ptr, octa_ptr);
+        }
+    }
+
 }
