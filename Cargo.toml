@@ -8,4 +8,4 @@ authors = ["Janina Born <jaborn@uni-osnabrueck.de>",
 
 [dependencies]
 [[bin]]
-name = "mmix"
+name = "mmix-sim"
