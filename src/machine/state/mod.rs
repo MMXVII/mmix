@@ -3,7 +3,7 @@ pub mod mem;
 pub mod sr;
 pub mod types;
 
-use machine::behavior::is::get_instruction_name;
+use machine::behavior::is::get_symbolics;
 use self::sr::SRegisters;
 use self::gpr::GPRegisters;
 use self::mem::*;
@@ -60,7 +60,7 @@ impl State {
         let x: u8 = self.mem[ByteAt(self.pc + 1)].into();
         let y: u8 = self.mem[ByteAt(self.pc + 2)].into();
         let z: u8 = self.mem[ByteAt(self.pc + 3)].into();
-        let name = get_instruction_name(opcode);
+        let name = get_symbolics(opcode);
 
         println!("");
         println!("PC: {}", self.pc);
