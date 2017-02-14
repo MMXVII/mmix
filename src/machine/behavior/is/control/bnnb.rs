@@ -11,6 +11,6 @@ pub fn bnnb(state: &mut State, x: u8, y: u8, z: u8) {
 
     // Store result
     if op1 >= 0 {
-    	state.pc = res.into();
+        state.pc = res.into();
     }
 }
