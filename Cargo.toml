@@ -6,4 +6,7 @@ authors = ["Janina Born <jaborn@uni-osnabrueck.de>",
            "Karoline Plum <kplum@uni-osnabrueck.de>",
            "Tobias Stolzmann <tobias.stolzmann@gmail.com>"]
 
+[[bin]]
+name = "mmixvm"
+
 [dependencies]
