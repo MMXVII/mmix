@@ -1,6 +1,6 @@
 use machine::state::State;
+use machine::behavior::is::control::bpb;
 
-pub fn pbpb(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
+pub fn pbpb(state: &mut State, x: u8, y: u8, z: u8) {
+    bpb(state, x, y, z);
 }
-
