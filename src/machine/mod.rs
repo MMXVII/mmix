@@ -1,10 +1,11 @@
 pub mod behavior;
 pub mod state;
 
+use self::state::mem::ByteAt;
 use self::state::State;
 
 pub struct Machine {
-    _state: State,
+    state: State,
     /* TODO add more fields... */
 }
 
@@ -12,23 +13,29 @@ impl Machine {
     // TODO FYI: Machine uses the builder pattern.
 
     pub fn new() -> Self {
-        unimplemented!();
+        Machine {
+            state: State::new()
+        }
     }
 
-    pub fn load(self, _pos: u64, _data: &[u8]) -> Self {
+    pub fn load(mut self, pos: u64, data: &[u8]) -> Self {
         // Loads the slice data to the position pos in memory
-        unimplemented!();
+        for i in 0..(data.len() as u64) {
+            self.state.mem[ByteAt(pos + i)] = data[i as usize].into()
+        }
+        self
     }
 
     pub fn set_breakpoint(self, _bp: u64) -> Self {
         unimplemented!();
     }
 
-    pub fn start(&self) {
+    pub fn start(&mut self) {
         unimplemented!();
     }
 
-    pub fn step(&self) {
-        unimplemented!();
+    pub fn step(&mut self) {
+        self.state.debug_output();
+        behavior::cu::cycle(&mut self.state);
     }
 }
