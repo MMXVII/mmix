@@ -6,7 +6,7 @@ pub fn flotui(state: &mut State, x: u8, y: u8, z: u8) {
 
     // Execute
     let mut res = op1 as f64;
-    match y {
+    match y {   // FIXME this might be incorrect
         1 => unimplemented!(),
         2 => unimplemented!(),
         3 => unimplemented!(),
@@ -17,4 +17,3 @@ pub fn flotui(state: &mut State, x: u8, y: u8, z: u8) {
     // Store result
     state.gpr[x] = res.into();
 }
-
