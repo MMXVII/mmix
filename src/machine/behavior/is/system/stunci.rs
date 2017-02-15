@@ -1,6 +1,7 @@
 use machine::state::State;
+use machine::behavior::is::memory::stoi;
 
-pub fn stunci(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
+/// store octa uncached immediate
+pub fn stunci(state: &mut State, x: u8, y: u8, z: u8) {
+    stoi(state, x, y, z);
 }
-
