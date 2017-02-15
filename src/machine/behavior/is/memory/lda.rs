@@ -1,6 +1,7 @@
 use machine::state::State;
+use machine::behavior::is::arithmetic::addu;
 
-pub fn lda(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
+/// load address
+pub fn lda(state: &mut State, x: u8, y: u8, z: u8) {
+    addu(state, x, y, z);
 }
-

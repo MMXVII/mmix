@@ -10,7 +10,6 @@ mod_def_reexport!{
     ldo,
     ldoui,
     ldou,
-    ldsfi,
     ldti,
     ldt,
     ldtui,
@@ -40,4 +39,3 @@ mod_def_reexport!{
     stwui,
     stwu,
 }
-

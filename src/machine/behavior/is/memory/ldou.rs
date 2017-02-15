@@ -1,6 +1,7 @@
 use machine::state::State;
+use machine::behavior::is::memory::ldo;
 
-pub fn ldou(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
+/// load octa unsigned
+pub fn ldou(state: &mut State, x: u8, y: u8, z: u8) {
+    ldo(state, x, y, z);
 }
-
