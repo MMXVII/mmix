@@ -64,6 +64,6 @@ impl State {
 
         println!("");
         println!("PC: {}", self.pc);
-        println!("Next instruction: {} x: #{:02x}, #y: {:02x}, z: #{:02x}", name, x, y, z);
+        println!("Next instruction: {} x: #{:02x}, y: #{:02x}, z: #{:02x}", name, x, y, z);
     }
 }
