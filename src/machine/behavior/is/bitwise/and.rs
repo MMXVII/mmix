@@ -1,5 +1,6 @@
 use machine::state::State;
 
+/// bitwise and
 pub fn and(state: &mut State, x: u8, y: u8, z: u8) {
     // Load operands
     let op1: u64 = state.gpr[y].into();

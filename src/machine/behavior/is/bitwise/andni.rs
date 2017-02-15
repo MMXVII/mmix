@@ -1,6 +1,13 @@
 use machine::state::State;
 
-pub fn andni(_state: &mut State, _x: u8, _y: u8, _z: u8) {
-    unimplemented!();
-}
+/// bitwise and-not immediate
+pub fn andni(state: &mut State, x: u8, y: u8, z: u8) {
+    // Load first operand
+    let op1: u64 = state.gpr[y].into();
 
+    // Execute
+    let res = op1 & !z as u64;
+
+    // Store result
+    state.gpr[x] = res.into();
+}
