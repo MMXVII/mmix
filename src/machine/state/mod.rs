@@ -30,6 +30,8 @@ impl State {
     }
 
     /// Display the state partially on the command line for testing purposes
+    /// Be warned, this is only a provisional function, and should be removed later.
+    /// Its functionality should be provided by a seperate View struct!
     pub fn debug_output(&self) {
 
         // Display content of first 5 GPRegs
