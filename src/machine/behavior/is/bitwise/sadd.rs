@@ -9,9 +9,7 @@ pub fn sadd(state: &mut State, x: u8, y: u8, z: u8) {
     // Execute
     let mut res: u64 = 0;
     while bits != 0 {
-        if bits % 2 != 0 {
-            res += 1;
-        }
+        res += bits % 2;
         bits /= 2;
     }
 
