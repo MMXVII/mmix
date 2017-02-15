@@ -379,4 +379,29 @@ mod tests {
             assert_eq!(zero, 0);
         }
     }
+
+    #[test]
+    fn equivalent_indices() {
+        let mut mem = Memory::with_capacity(16);
+
+        for i in 0..16 {
+            mem[ByteAt(i)] = (i as u8).into();
+        }
+
+        for i in 1..8 {
+            assert_eq!(mem[ OctaAt( 0)], mem[ OctaAt(     i)]);
+            assert_eq!(mem[ OctaAt( 8)], mem[ OctaAt( 8 + i)]);
+        }
+
+        for i in 1..4 {
+            assert_eq!(mem[TetraAt( 0)], mem[TetraAt(     i)]);
+            assert_eq!(mem[TetraAt( 4)], mem[TetraAt( 4 + i)]);
+            assert_eq!(mem[TetraAt( 8)], mem[TetraAt( 8 + i)]);
+            assert_eq!(mem[TetraAt(12)], mem[TetraAt(12 + i)]);
+        }
+
+        for i in 0..8 {
+            assert_eq!(mem[WydeAt(2 * i)], mem[WydeAt(2 * i + 1)]);
+        }
+    }
 }
