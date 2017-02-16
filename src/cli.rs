@@ -1,5 +1,6 @@
 use clap::{App, AppSettings, Arg};
 
+#[derive(Debug)]
 pub struct Config {
     filename: String,
     step: bool,
