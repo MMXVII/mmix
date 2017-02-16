@@ -7,7 +7,7 @@ pub fn cycle(state: &mut State) {
     // tetrabyte that is to be executed next.
     // We compute the address of the first byte of the next instruction, which stores
     // the instruction's opcode.
-    let opcode_address = state.pc & 0xFFFFFFFFFFFFFF00;
+    let opcode_address = state.pc & !(2 + 1);
 
     // Fetch opcode and operands
     let opcode: u8 = state.mem[ByteAt(opcode_address)].into();
