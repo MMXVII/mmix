@@ -18,22 +18,26 @@ pub struct State {
 impl State {
     pub fn new() -> Self {
         State {
-            // For the moment start execution at address 0
-            pc: 0,
+            pc:     0,                      // default bootstrap address: 0x0
+            sr:     SRegisters::new(),
+            gpr:    GPRegisters::new(),
+            mem:    Memory::new(),
+        }
+    }
 
-            sr: SRegisters::new(),
-            gpr: GPRegisters::new(),
-
-            // For the moment create 1MB of memory
-            mem: Memory::with_capacity(0x100000)
+    pub fn from_parts(pc: u64, sr: SRegisters, gpr: GPRegisters, mem: Memory) -> Self {
+        State {
+            pc:     pc,
+            sr:     sr,
+            gpr:    gpr,
+            mem:    mem,
         }
     }
 
     /// Display the state partially on the command line for testing purposes
     /// Be warned, this is only a provisional function, and should be removed later.
-    /// Its functionality should be provided by a seperate View struct!
+    /// Its functionality should be provided by a seperate View struct! FIXME
     pub fn debug_output(&self) {
-
         // Display content of first 5 GPRegs
         for i in 0 .. 5 {
             let val: u64 = self.gpr[i as u8].into();

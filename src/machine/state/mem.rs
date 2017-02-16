@@ -20,7 +20,7 @@ pub struct Memory {
 
 impl Memory {
     pub fn new() -> Self {
-        unimplemented!();
+        Memory::with_capacity(1024 * 1024)  // 1 MiB
     }
 
     pub fn with_capacity(bytes: u64) -> Self {

@@ -19,9 +19,8 @@ impl Machine {
     }
 
     pub fn load(mut self, pos: u64, data: &[u8]) -> Self {
-        // Loads the slice data to the position pos in memory
-        for i in 0..(data.len() as u64) {
-            self.state.mem[ByteAt(pos + i)] = data[i as usize].into()
+        for i in (pos..).take(data.len()) {
+            self.state.mem[ByteAt(i)] = data[i as usize].into()
         }
         self
     }
@@ -35,7 +34,13 @@ impl Machine {
     }
 
     pub fn step(&mut self) {
-        self.state.debug_output();
         behavior::cu::cycle(&mut self.state);
+    }
+
+    /// Display the state partially on the command line for testing purposes
+    /// Be warned, this is only a provisional function, and should be removed later.
+    /// Its functionality should be provided by a seperate View struct! FIXME
+    pub fn debug_output(&self) {
+        self.state.debug_output();
     }
 }
