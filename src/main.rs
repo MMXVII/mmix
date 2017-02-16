@@ -32,9 +32,9 @@ fn main() {
 
     // Start the machine
     loop {
-        run(&mut mmix);
-        mmix.debug_output();
-        read_string();  // TODO wait for user input, this can be done in a better way
+        mmix.debug_output();    // Print the current state
+        pause();                // Wait for the user to press enter
+        run(&mut mmix);         // Run the machine until it pauses
     }
 }
 
@@ -42,16 +42,8 @@ fn read(name: &str) -> Result<Vec<u8>, Error> {
     File::open(name)?.bytes().collect()
 }
 
-/// Reads a string from the terminal/user.
-fn read_string() -> String {
-    let mut buffer = String::new();
+fn pause() {
     std::io::stdin()
-        .read_line(&mut buffer)
+        .read_line(&mut String::new())
         .expect("something went horribly wrong...");
-
-    // Discard trailing newline
-    let new_len = buffer.trim_right().len();
-    buffer.truncate(new_len);
-
-    buffer
 }
