@@ -1,3 +1,5 @@
+extern crate clap;
+
 pub mod cli;
 mod io;
 pub mod machine;
