@@ -33,7 +33,7 @@ fn main() {
     // Start the machine
     loop {
         run(&mut mmix);
-        // TODO print machine state to io
+        mmix.debug_output();
         read_string();  // TODO wait for user input, this can be done in a better way
     }
 }

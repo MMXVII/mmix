@@ -34,7 +34,13 @@ impl Machine {
     }
 
     pub fn step(&mut self) {
-        self.state.debug_output();
         behavior::cu::cycle(&mut self.state);
+    }
+
+    /// Display the state partially on the command line for testing purposes
+    /// Be warned, this is only a provisional function, and should be removed later.
+    /// Its functionality should be provided by a seperate View struct! FIXME
+    pub fn debug_output(&self) {
+        self.state.debug_output();
     }
 }

@@ -36,9 +36,8 @@ impl State {
 
     /// Display the state partially on the command line for testing purposes
     /// Be warned, this is only a provisional function, and should be removed later.
-    /// Its functionality should be provided by a seperate View struct!
+    /// Its functionality should be provided by a seperate View struct! FIXME
     pub fn debug_output(&self) {
-
         // Display content of first 5 GPRegs
         for i in 0 .. 5 {
             let val: u64 = self.gpr[i as u8].into();
