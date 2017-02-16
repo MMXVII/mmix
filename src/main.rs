@@ -1,37 +1,44 @@
 extern crate mmix;
 
+use mmix::cli::Config;
 use mmix::machine::Machine;
 
 use std::fs::File;
 use std::io::{Error, Read};
 
 fn main() {
-    // TODO read filename(s) from command line parameters
-    let filename = "test.mmo";
+    // Parse CLI arguments
+    let config = Config::parse();
 
-
-    let bytes = match read_executable(filename) {
-        Ok(vec) => vec,
-        _ => {
-            println!("Could not read executable!");
+    // Read the executable
+    let exe = match read(config.filename()) {
+        Ok(x) => x,
+        Err(err) => {
+            println!("Cannot read '{}': {}", config.filename(), err);
             return
         }
     };
 
+    // Build a new machine
+    let mut mmix =
+        Machine::new()              // Create   //TODO idea: Machine::with_memory(...)
+                .load(0, &exe);     // Load executable
 
-    // Instantiate new machine and load the executable starting at address 0
-    let mut mmix = Machine::new().load(0, &bytes);
+    // Determine the execution method
+    let run = match config.step() {
+        true  => Machine::step,
+        false => Machine::start,
+    };
 
-
+    // Start the machine
     loop {
-        mmix.step();
-        read_string();
+        run(&mut mmix);
+        // TODO print machine state to io
+        read_string();  // TODO wait for user input, this can be done in a better way
     }
-
-
 }
 
-fn read_executable(name: &str) -> Result<Vec<u8>, Error> {
+fn read(name: &str) -> Result<Vec<u8>, Error> {
     File::open(name)?.bytes().collect()
 }
 

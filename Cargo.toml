@@ -10,3 +10,4 @@ authors = ["Janina Born <jaborn@uni-osnabrueck.de>",
 name = "mmixvm"
 
 [dependencies]
+clap = "2"
