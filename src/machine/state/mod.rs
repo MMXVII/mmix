@@ -18,14 +18,19 @@ pub struct State {
 impl State {
     pub fn new() -> Self {
         State {
-            // For the moment start execution at address 0
-            pc: 0,
+            pc:     0,                      // default bootstrap address: 0x0
+            sr:     SRegisters::new(),
+            gpr:    GPRegisters::new(),
+            mem:    Memory::new(),
+        }
+    }
 
-            sr: SRegisters::new(),
-            gpr: GPRegisters::new(),
-
-            // For the moment create 1MB of memory
-            mem: Memory::with_capacity(0x100000)
+    pub fn from_parts(pc: u64, sr: SRegisters, gpr: GPRegisters, mem: Memory) -> Self {
+        State {
+            pc:     pc,
+            sr:     sr,
+            gpr:    gpr,
+            mem:    mem,
         }
     }
 
