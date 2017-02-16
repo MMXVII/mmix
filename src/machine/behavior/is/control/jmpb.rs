@@ -8,7 +8,7 @@ pub fn jmpb(state: &mut State, x: u8, y: u8, z: u8) {
     let at: u64 = state.pc.into();
 
     // Execute
-    let ra: u64 = at + 4 * (xyz - 2u64.pow(24u32));
+    let ra: u64 = at - 4 * xyz;
 
     // Store result
     state.pc = ra.into();
