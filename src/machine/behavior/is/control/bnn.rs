@@ -1,5 +1,6 @@
 use machine::state::State;
 
+/// branch if nonnegative
 pub fn bnn(state: &mut State, x: u8, y: u8, z: u8) {
     // Load operands
     let op1: i64 = state.gpr[x].into();
