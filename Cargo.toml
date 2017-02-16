@@ -11,3 +11,4 @@ name = "mmixvm"
 
 [dependencies]
 clap = "2"
+extprim = "1"
