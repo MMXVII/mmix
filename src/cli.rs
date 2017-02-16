@@ -10,12 +10,10 @@ impl Config {
     }
 
     pub fn filename(&self) -> &str {
-        // TODO
-        unimplemented!();
+        &self.filename
     }
 
     pub fn step(&self) -> bool {
-        // TODO
-        unimplemented!();
+        self.step
     }
 }
