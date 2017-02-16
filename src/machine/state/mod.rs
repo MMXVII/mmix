@@ -4,7 +4,7 @@ pub mod sr;
 pub mod types;
 
 use machine::behavior::is::get_symbolics;
-use self::sr::SRegisters;
+use self::sr::{R, SRegisters};
 use self::gpr::GPRegisters;
 use self::mem::*;
 
@@ -38,38 +38,55 @@ impl State {
     /// Be warned, this is only a provisional function, and should be removed later.
     /// Its functionality should be provided by a seperate View struct! FIXME
     pub fn debug_output(&self) {
-        // Display content of first 5 GPRegs
-        for i in 0 .. 5 {
-            let val: u64 = self.gpr[i as u8].into();
+        // General purpose registers
+        for i in 0..5u8 {
+            let val: u64 = self.gpr[i].into();
 
-            println!("GP[{}]: {:016x}", i, val);
+            let hi = (val >> 48) as u16;
+            let mh = (val >> 32) as u16;
+            let ml = (val >> 16) as u16;
+            let lo =  val        as u16;
+
+            println!("gpr[{}]:\t\t{:04x} {:04x} {:04x} {:04x}", i, hi, mh, ml, lo);
         }
+        println!();
 
+        // Special registers
+        {
+            let val: u64 = self.sr[R::R].into();
+
+            let hi = (val >> 48) as u16;
+            let mh = (val >> 32) as u16;
+            let ml = (val >> 16) as u16;
+            let lo =  val        as u16;
+
+            println!("sr[R::R]:\t{:04x} {:04x} {:04x} {:04x}", hi, mh, ml, lo);
+        }
         println!("");
 
-        // Display memory cells 100 - 139 -> 5 Octas
-        for i in 0 .. 5 {
-            // Compute the index of the octa
-            let idx = 100 + 8 * i;
-
-            // Extract value of each wyde contained in octa
-            let hi: u16 = self.mem[WydeAt(idx)].into();
-            let med_hi: u16 = self.mem[WydeAt(idx + 2)].into();
-            let med_lo: u16 = self.mem[WydeAt(idx + 4)].into();
-            let lo: u16 = self.mem[WydeAt(idx + 6)].into();
-            println!("M[OctaAt({})]: # {:04x} {:04x} {:04x} {:04x}", idx, hi, med_hi, med_lo, lo);
+        // Memory
+        for i in 0..5 {
+            let hi: u16 = self.mem[WydeAt(i    )].into();
+            let mh: u16 = self.mem[WydeAt(i + 2)].into();
+            let ml: u16 = self.mem[WydeAt(i + 4)].into();
+            let lo: u16 = self.mem[WydeAt(i + 6)].into();
+            println!("mem[OctaAt({})]:\t{:04x} {:04x} {:04x} {:04x}", i, hi, mh, ml, lo);
         }
-
-
-        // Inform about instruction that will be executed in the next cycle
-        let opcode: u8 = self.mem[ByteAt(self.pc)].into();
-        let x: u8 = self.mem[ByteAt(self.pc + 1)].into();
-        let y: u8 = self.mem[ByteAt(self.pc + 2)].into();
-        let z: u8 = self.mem[ByteAt(self.pc + 3)].into();
-        let name = get_symbolics(opcode);
-
         println!("");
-        println!("PC: {}", self.pc);
-        println!("Next instruction: {} x: #{:02x}, y: #{:02x}, z: #{:02x}", name, x, y, z);
+
+        // Programm counter
+        {
+            println!("pc:\t{}", self.pc);
+
+            let op: u8 = self.mem[ByteAt(self.pc    )].into();
+            let x:  u8 = self.mem[ByteAt(self.pc + 1)].into();
+            let y:  u8 = self.mem[ByteAt(self.pc + 2)].into();
+            let z:  u8 = self.mem[ByteAt(self.pc + 3)].into();
+            let sym = get_symbolics(op);
+
+            println!("next:\t{} x:{:02x} y:{:02x} z:{:02x}", sym, x, y, z);
+        }
+        println!("");
+        println!("-----------------------------------");
     }
 }
