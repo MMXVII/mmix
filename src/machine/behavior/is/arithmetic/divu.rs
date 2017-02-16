@@ -1,6 +1,7 @@
-use extprim::u128::{u128, div_rem};
 use machine::state::State;
 use machine::state::sr::R;
+
+use extprim::u128::{u128, div_rem};
 
 /// divide unsigned
 pub fn divu(state: &mut State, x: u8, y: u8, z: u8) {
