@@ -21,7 +21,7 @@ fn main() {
 
     // Build a new machine
     let mut mmix =
-        Machine::new()              // Create   //TODO idea: Machine::with_memory(...)
+        Machine::new()              // Create
                 .load(0, &exe);     // Load executable
 
     // Determine the execution method
