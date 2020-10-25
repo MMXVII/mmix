@@ -1,3 +1,18 @@
+//! Encapsulates the state of an MMIX virtual machine.
+//!
+//! This module provides algorithms and data structures that implement the state of an MMIX virtual
+//! machine. This includes an implementation for
+//!
+//!   - the main memory (`mem`),
+//!   - the general purpose registers (`gpr`) and
+//!   - the special registers (`sr`).
+//!
+//! Details can be found in the submodule documentation. (The name of the submodule is denoted
+//! within the brackets!)
+//!
+//! This module does also contain a struct called `State` which represents the whole state of an
+//! MMIX. It provides functions working on a higher level.
+
 pub mod gpr;
 pub mod mem;
 pub mod sr;
