@@ -1,5 +1,6 @@
 use machine::state::State;
 
+/// branch if negative backwards
 pub fn bnb(state: &mut State, x: u8, y: u8, z: u8) {
     // Load operands
     let op1: i64 = state.gpr[x].into();
@@ -7,7 +8,7 @@ pub fn bnb(state: &mut State, x: u8, y: u8, z: u8) {
     let at: u64 = state.pc.into();
 
     // Execute
-    let res: u64 = at + 4 * (ra - 2u64.pow(16u32));
+    let res: u64 = at - 4 * ra;
 
     // Store result
     if op1 < 0 {

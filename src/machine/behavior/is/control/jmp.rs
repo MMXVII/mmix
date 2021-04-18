@@ -1,5 +1,6 @@
 use machine::state::State;
 
+/// jump
 pub fn jmp(state: &mut State, x: u8, y: u8, z: u8) {
     // Load operands
     let x: u64 = (x as u64) << 16;
